@@ -22,17 +22,82 @@ const client = createClient({
   accessToken: env.ACCESS_TOKEN,
 });
 
-const gauge1 = new Gauge({
-  name: "satisfactory_server_game_state_is_game_paused",
-  help: "Is the game paused?",
+new Gauge({
+  name: "satisfactory_server_game_state_average_tick_rate",
+  help: "Average tick rate of the server, in ticks per second",
+  async collect() {
+    try {
+      const { data } = await client.v1.QueryServerState();
+      this.set(data.serverGameState.averageTickRate);
+    } catch {}
+  },
 });
 
-setInterval(async () => {
-  try {
-    const { data } = await client.v1.QueryServerState();
-    gauge1.set(data.serverGameState.isGamePaused ? 1 : 0);
-  } catch {}
-}, env.SCRAPE_INTERVAL);
+new Gauge({
+  name: "satisfactory_server_game_state_is_game_paused",
+  help: "1 if the game is paused. If the game is paused, total game duration does not increase",
+  async collect() {
+    try {
+      const { data } = await client.v1.QueryServerState();
+      this.set(data.serverGameState.isGamePaused ? 1 : 0);
+    } catch {}
+  },
+});
+
+new Gauge({
+  name: "satisfactory_server_game_state_is_game_running",
+  help: "1 if the save is currently loaded, 0 if the server is waiting for the session to be created",
+  async collect() {
+    try {
+      const { data } = await client.v1.QueryServerState();
+      this.set(data.serverGameState.isGameRunning ? 1 : 0);
+    } catch {}
+  },
+});
+
+new Gauge({
+  name: "satisfactory_server_game_state_num_connected_players",
+  help: "Number of the players currently connected to the Dedicated Server",
+  async collect() {
+    try {
+      const { data } = await client.v1.QueryServerState();
+      this.set(data.serverGameState.numConnectedPlayers);
+    } catch {}
+  },
+});
+
+new Gauge({
+  name: "satisfactory_server_game_state_player_limit",
+  help: "Maximum number of the players that can be connected to the Dedicated Server",
+  async collect() {
+    try {
+      const { data } = await client.v1.QueryServerState();
+      this.set(data.serverGameState.playerLimit);
+    } catch {}
+  },
+});
+
+new Gauge({
+  name: "satisfactory_server_game_state_tech_tier",
+  help: "Maximum Tech Tier of all Schematics currently unlocked",
+  async collect() {
+    try {
+      const { data } = await client.v1.QueryServerState();
+      this.set(data.serverGameState.techTier);
+    } catch {}
+  },
+});
+
+new Gauge({
+  name: "satisfactory_server_game_state_total_game_duration",
+  help: "Total time the current save has been loaded, in seconds",
+  async collect() {
+    try {
+      const { data } = await client.v1.QueryServerState();
+      this.set(data.serverGameState.totalGameDuration);
+    } catch {}
+  },
+});
 
 app.get("/metrics", async (req, res) => {
   try {
