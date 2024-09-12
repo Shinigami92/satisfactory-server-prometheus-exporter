@@ -31,6 +31,7 @@ export function memoFactory<TData>(
       return data;
     } catch (error) {
       console.error(error);
+      currentPromise = null;
     }
 
     return null;
