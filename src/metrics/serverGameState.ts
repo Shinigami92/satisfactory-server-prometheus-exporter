@@ -1,13 +1,13 @@
 import { Gauge } from "prom-client";
 import type {
-  createClient,
+  Client,
   QueryServerStateResponseData,
 } from "satisfactory-server-api-client";
 
 let lastNow: number | null = null;
 let lastData: QueryServerStateResponseData | null = null;
 
-async function memo(client: ReturnType<typeof createClient>) {
+async function memo(client: Client) {
   const now = Date.now();
 
   if (lastNow && lastData && now - lastNow < 1000) {
@@ -28,9 +28,7 @@ async function memo(client: ReturnType<typeof createClient>) {
   return null;
 }
 
-export function registerServerGameStateMetrics(
-  client: ReturnType<typeof createClient>
-) {
+export function registerServerGameStateMetrics(client: Client) {
   const metrics = [];
 
   metrics.push(
