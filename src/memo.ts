@@ -6,21 +6,27 @@ import type {
 export function memoFactory<TData>(
   cb: (client: Client) => Promise<ApiSuccessResponse<TData>>
 ) {
-  let lastNow: number | null = null;
-  let lastData: TData | null = null;
+  let refreshNow: number = Date.now();
+  let cachedData: TData | null = null;
+  let currentPromise: Promise<ApiSuccessResponse<TData>> | null = null;
 
   return async function memo(client: Client): Promise<TData | null> {
     const now = Date.now();
 
-    if (lastNow && lastData && now - lastNow < 1000) {
-      return lastData;
+    if (now < refreshNow) {
+      return cachedData;
     }
 
     try {
-      const { data } = await cb(client);
+      if (!currentPromise) {
+        currentPromise = cb(client);
+      }
 
-      lastNow = now;
-      lastData = data;
+      const { data } = await currentPromise;
+
+      refreshNow = now + 1000;
+      cachedData = data;
+      currentPromise = null;
 
       return data;
     } catch (error) {
