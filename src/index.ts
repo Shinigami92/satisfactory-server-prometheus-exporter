@@ -2,6 +2,7 @@ import express from "express";
 import { register } from "prom-client";
 import { createClient } from "satisfactory-server-api-client";
 import { env } from "./env.js";
+import { registerGetAdvancedGameSettings } from "./metrics/advancedGameSettings.js";
 import { registerServerGameStateMetrics } from "./metrics/serverGameState.js";
 
 const app = express();
@@ -23,6 +24,7 @@ const client = createClient({
   accessToken: env.ACCESS_TOKEN,
 });
 
+registerGetAdvancedGameSettings(client);
 registerServerGameStateMetrics(client);
 
 app.get("/metrics", async (req, res) => {
