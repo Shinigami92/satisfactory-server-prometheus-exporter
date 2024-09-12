@@ -3,30 +3,11 @@ import type {
   Client,
   GetAdvancedGameSettingsResponseData,
 } from "satisfactory-server-api-client";
+import { memoFactory } from "../memo.js";
 
-let lastNow: number | null = null;
-let lastData: GetAdvancedGameSettingsResponseData | null = null;
-
-async function memo(client: Client) {
-  const now = Date.now();
-
-  if (lastNow && lastData && now - lastNow < 1000) {
-    return lastData;
-  }
-
-  try {
-    const { data } = await client.v1.GetAdvancedGameSettings();
-
-    lastNow = now;
-    lastData = data;
-
-    return data;
-  } catch (error) {
-    console.error(error);
-  }
-
-  return null;
-}
+const memo = memoFactory<GetAdvancedGameSettingsResponseData>((client) =>
+  client.v1.GetAdvancedGameSettings()
+);
 
 export function registerGetAdvancedGameSettings(client: Client) {
   const metrics = [];

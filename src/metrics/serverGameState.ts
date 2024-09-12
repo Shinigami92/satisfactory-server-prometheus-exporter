@@ -3,30 +3,11 @@ import type {
   Client,
   QueryServerStateResponseData,
 } from "satisfactory-server-api-client";
+import { memoFactory } from "../memo.js";
 
-let lastNow: number | null = null;
-let lastData: QueryServerStateResponseData | null = null;
-
-async function memo(client: Client) {
-  const now = Date.now();
-
-  if (lastNow && lastData && now - lastNow < 1000) {
-    return lastData;
-  }
-
-  try {
-    const { data } = await client.v1.QueryServerState();
-
-    lastNow = now;
-    lastData = data;
-
-    return data;
-  } catch (error) {
-    console.error(error);
-  }
-
-  return null;
-}
+const memo = memoFactory<QueryServerStateResponseData>((client) =>
+  client.v1.QueryServerState()
+);
 
 export function registerServerGameStateMetrics(client: Client) {
   const metrics = [];
