@@ -20,6 +20,9 @@ app.get("/", (req, res) => {
 `);
 });
 
+// Disable SSL certificate validation
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
 const client = createClient({
   accessToken: env.ACCESS_TOKEN,
 });
