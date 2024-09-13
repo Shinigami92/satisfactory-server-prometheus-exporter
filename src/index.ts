@@ -5,6 +5,7 @@ import { env } from "./env.js";
 import { registerGetAdvancedGameSettings } from "./metrics/advancedGameSettings.js";
 import { registerHealthCheckMetrics } from "./metrics/healthCheck.js";
 import { registerServerGameStateMetrics } from "./metrics/serverGameState.js";
+import { registerServerOptionsMetrics } from "./metrics/serverOptions.js";
 
 const app = express();
 
@@ -32,6 +33,7 @@ const client = createClient({
 registerGetAdvancedGameSettings(client);
 registerHealthCheckMetrics(client);
 registerServerGameStateMetrics(client);
+registerServerOptionsMetrics(client);
 
 app.get("/metrics", async (req, res) => {
   try {
