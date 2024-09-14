@@ -32,6 +32,9 @@ export function memoFactory<TData>(
       return cachedData;
     }
 
+    // If there is no current promise, then we own the promise and need to handle the error.
+    const ownsPromise = !currentPromise;
+
     try {
       if (!currentPromise) {
         currentPromise = cb(client);
@@ -45,8 +48,10 @@ export function memoFactory<TData>(
 
       return data;
     } catch (error) {
-      console.error(error);
-      currentPromise = null;
+      if (ownsPromise) {
+        console.error(error);
+        currentPromise = null;
+      }
       throw error;
     }
   };
