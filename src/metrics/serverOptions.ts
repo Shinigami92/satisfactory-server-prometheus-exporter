@@ -18,7 +18,7 @@ export function registerServerOptionsMetrics(client: Client) {
       help: "Whether auto pause is enabled in the server options",
       async collect() {
         const data = await memo(client);
-        this.set(data?.serverOptions["FG.DSAutoPause"] === "True" ? 1 : 0);
+        this.set(data.serverOptions["FG.DSAutoPause"] === "True" ? 1 : 0);
       },
     })
   );
@@ -30,7 +30,7 @@ export function registerServerOptionsMetrics(client: Client) {
       async collect() {
         const data = await memo(client);
         this.set(
-          data?.serverOptions["FG.DSAutoSaveOnDisconnect"] === "True" ? 1 : 0
+          data.serverOptions["FG.DSAutoSaveOnDisconnect"] === "True" ? 1 : 0
         );
       },
     })
@@ -42,7 +42,7 @@ export function registerServerOptionsMetrics(client: Client) {
       help: "Whether sending gameplay data is enabled in the server options",
       async collect() {
         const data = await memo(client);
-        this.set(data?.serverOptions["FG.SendGameplayData"] === "True" ? 1 : 0);
+        this.set(data.serverOptions["FG.SendGameplayData"] === "True" ? 1 : 0);
       },
     })
   );

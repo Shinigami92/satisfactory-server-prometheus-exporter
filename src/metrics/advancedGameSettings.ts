@@ -19,9 +19,8 @@ export function registerGetAdvancedGameSettings(client: Client) {
       async collect() {
         const data = await memo(client);
         this.set(
-          data?.advancedGameSettings[
-            "FG.GameRules.DisableArachnidCreatures"
-          ] === "True"
+          data.advancedGameSettings["FG.GameRules.DisableArachnidCreatures"] ===
+            "True"
             ? 1
             : 0
         );
@@ -36,7 +35,7 @@ export function registerGetAdvancedGameSettings(client: Client) {
       async collect() {
         const data = await memo(client);
         this.set(
-          data?.advancedGameSettings["FG.GameRules.GiveAllTiers"] === "True"
+          data.advancedGameSettings["FG.GameRules.GiveAllTiers"] === "True"
             ? 1
             : 0
         );
@@ -51,7 +50,7 @@ export function registerGetAdvancedGameSettings(client: Client) {
       async collect() {
         const data = await memo(client);
         this.set(
-          data?.advancedGameSettings["FG.GameRules.NoPower"] === "True" ? 1 : 0
+          data.advancedGameSettings["FG.GameRules.NoPower"] === "True" ? 1 : 0
         );
       },
     })
@@ -64,7 +63,7 @@ export function registerGetAdvancedGameSettings(client: Client) {
       async collect() {
         const data = await memo(client);
         this.set(
-          data?.advancedGameSettings["FG.GameRules.NoUnlockCost"] === "True"
+          data.advancedGameSettings["FG.GameRules.NoUnlockCost"] === "True"
             ? 1
             : 0
         );
@@ -79,7 +78,7 @@ export function registerGetAdvancedGameSettings(client: Client) {
       async collect() {
         const data = await memo(client);
         this.set(
-          data?.advancedGameSettings[
+          data.advancedGameSettings[
             "FG.GameRules.UnlockAllResearchSchematics"
           ] === "True"
             ? 1
@@ -96,7 +95,7 @@ export function registerGetAdvancedGameSettings(client: Client) {
       async collect() {
         const data = await memo(client);
         this.set(
-          data?.advancedGameSettings[
+          data.advancedGameSettings[
             "FG.GameRules.UnlockAllResourceSinkSchematics"
           ] === "True"
             ? 1
@@ -113,7 +112,7 @@ export function registerGetAdvancedGameSettings(client: Client) {
       async collect() {
         const data = await memo(client);
         this.set(
-          data?.advancedGameSettings["FG.GameRules.UnlockInstantAltRecipes"] ===
+          data.advancedGameSettings["FG.GameRules.UnlockInstantAltRecipes"] ===
             "True"
             ? 1
             : 0
@@ -129,7 +128,7 @@ export function registerGetAdvancedGameSettings(client: Client) {
       async collect() {
         const data = await memo(client);
         this.set(
-          data?.advancedGameSettings["FG.PlayerRules.FlightMode"] === "True"
+          data.advancedGameSettings["FG.PlayerRules.FlightMode"] === "True"
             ? 1
             : 0
         );
@@ -144,9 +143,7 @@ export function registerGetAdvancedGameSettings(client: Client) {
       async collect() {
         const data = await memo(client);
         this.set(
-          data?.advancedGameSettings["FG.PlayerRules.GodMode"] === "True"
-            ? 1
-            : 0
+          data.advancedGameSettings["FG.PlayerRules.GodMode"] === "True" ? 1 : 0
         );
       },
     })
@@ -159,7 +156,7 @@ export function registerGetAdvancedGameSettings(client: Client) {
       async collect() {
         const data = await memo(client);
         this.set(
-          data?.advancedGameSettings["FG.PlayerRules.NoBuildCost"] === "True"
+          data.advancedGameSettings["FG.PlayerRules.NoBuildCost"] === "True"
             ? 1
             : 0
         );
@@ -173,7 +170,7 @@ export function registerGetAdvancedGameSettings(client: Client) {
       help: "Whether creative mode is enabled",
       async collect() {
         const data = await memo(client);
-        this.set(data?.creativeModeEnabled ? 1 : 0);
+        this.set(data.creativeModeEnabled ? 1 : 0);
       },
     })
   );

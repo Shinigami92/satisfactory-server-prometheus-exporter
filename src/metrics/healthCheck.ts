@@ -22,7 +22,7 @@ export function registerHealthCheckMetrics(client: Client) {
       help: '1="healthy" if tick rate is above ten ticks per second, 0="slow" otherwise',
       async collect() {
         const data = await memo(client);
-        this.set(data?.health === "healthy" ? 1 : 0);
+        this.set(data.health === "healthy" ? 1 : 0);
       },
     })
   );
