@@ -3,6 +3,7 @@ import { register } from "prom-client";
 import { createClient } from "satisfactory-server-api-client";
 import { env } from "./env.js";
 import { registerGetAdvancedGameSettings } from "./metrics/advancedGameSettings.js";
+import { registerEnumerateSessionsMetrics } from "./metrics/enumerateSessions.js";
 import { registerHealthCheckMetrics } from "./metrics/healthCheck.js";
 import { registerServerGameStateMetrics } from "./metrics/serverGameState.js";
 import { registerServerOptionsMetrics } from "./metrics/serverOptions.js";
@@ -30,6 +31,7 @@ const client = createClient({
   accessToken: env.ACCESS_TOKEN,
 });
 
+registerEnumerateSessionsMetrics(client);
 registerGetAdvancedGameSettings(client);
 registerHealthCheckMetrics(client);
 registerServerGameStateMetrics(client);

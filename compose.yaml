@@ -10,3 +10,4 @@ services:
       - NODE_ENV=production
     ports:
       - 9777:9777
+    restart: unless-stopped
