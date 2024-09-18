@@ -7,6 +7,7 @@ It uses the [satisfactory-server-api-client](https://www.npmjs.com/package/satis
 
 You can obtain an `accessToken` by executing `server.GenerateAPIToken` in your server console.
 
-# Alternatives
+## See Also
 
-If you want to use a solution implemented in Rust, have a look at https://github.com/dwmunster/satisfactory-exporter.
+- [wolveix/satisfactory-server](https://github.com/wolveix/satisfactory-server) - A Docker image for running a Satisfactory Dedicated Server.
+- [dwmunster/satisfactory-exporter](https://github.com/dwmunster/satisfactory-exporter) - An alternative Prometheus Exporter for Satisfactory Dedicated Server written in Rust.
