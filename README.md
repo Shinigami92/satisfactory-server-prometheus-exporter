@@ -11,3 +11,4 @@ You can obtain an `accessToken` by executing `server.GenerateAPIToken` in your s
 
 - [wolveix/satisfactory-server](https://github.com/wolveix/satisfactory-server) - A Docker image for running a Satisfactory Dedicated Server.
 - [dwmunster/satisfactory-exporter](https://github.com/dwmunster/satisfactory-exporter) - An alternative Prometheus Exporter for Satisfactory Dedicated Server written in Rust.
+- [sleavely/satisfactory-savegame-prometheus-exporter](Sleavely/satisfactory-savegame-prometheus-exporter) - Exports additional metrics to Prometheus by parsing save game files
